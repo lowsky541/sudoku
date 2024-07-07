@@ -1,8 +1,8 @@
-package main
+package sudoku
 
 import "time"
 
 const (
-	BacktrackingVisualize bool          = false
+	BacktrackingVisualize bool          = true
 	BacktrackingStepTime  time.Duration = 150 * time.Millisecond
 )

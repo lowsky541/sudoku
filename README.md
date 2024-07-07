@@ -1,32 +1,32 @@
-# Solving sudokus with backtracking
+# sudoku
+
+This repository contains the code for a `sudoku` solver written in Go using a backtracking approach for solving.
 
 ## Using the program
 
-The program let's you input a sudoku via the command line by entering each row of the sudoku as separate arguments. Dots are used as placeholders for empties.
-
-### Building
-
-The program has been written in Go-be sure to have it installed on your system.
-
-Input the follwing commands in your terminal to build the program in a newly created *./build* directory.
+The program let's you input a sudoku via the command line by entering each row of the sudoku as separate arguments. Dots are used as placeholders for fillable cells.
 
 ```sh
-make .
+go run . ".96.4...1" "1...6...4" "5.481.39." "..795..43" ".3..8...." "4.5.23.18" ".1.63..59" ".59.7.83." "..359...7"
+```
+
+```
+This sudoku has been solved in 138.789µs.
+3 9 6 2 4 5 7 8 1
+1 7 8 3 6 9 5 2 4
+5 2 4 8 1 7 3 9 6
+2 8 7 9 5 1 6 4 3
+9 3 1 4 8 6 2 7 5
+4 6 5 7 2 3 9 1 8
+7 1 2 6 3 8 4 5 9
+6 5 9 1 7 4 8 3 2
+8 4 3 5 9 2 1 6 7
 ```
 
 ## What's backtracking ?
 
-![alt text](https://camo.githubusercontent.com/cfa2fdd940fc2570245e9ed9a6323567978253384697b1293e40f12d6985cfc6/68747470733a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f636f6d6d6f6e732f382f38632f5375646f6b755f736f6c7665645f62795f626163747261636b696e672e676966 "Visualization of backtracking")
+![Visualization of backtracking](/assets/backtracking.gif)
 
 "Backtracking is a general algorithm for finding solutions to some computational problems, notably constraint satisfaction problems, that incrementally builds candidates to the solutions, and abandons a candidate ("backtracks") as soon as it determines that the candidate cannot possibly be completed to a valid solution."
 
 In the case of a sudoku solver, the solver tries to find the first empty cell and fills it with a valid digit that doesn't already occurs in the corresponding row, column or 3x3 section. In the following step we move to the next empty cell and insert another valid digit and so on. If we get stuck and tried all possible values for the current cell then we move back to the previous one (which is called as backtracking). Now we try there our luck with the next valid digit in this cell and move on. The board is finally solved if the program was able to fill all cells with a valid digit.
-
-## Documentation for developers
-
-### File structure
-
-**main.go**: Entry point and logics of the program.  
-**parser.go**: Command-line reading functions.  
-**display.go**: Board display related functions.  
-**config.go**: Configuration of the program--be sure to rebuild after changements.

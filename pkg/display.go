@@ -1,8 +1,9 @@
-package main
+package sudoku
 
 import "fmt"
 
-func DisplayBoard(board [9][9]int) {
+// Display a board.
+func Display(board Board) {
 	for y := 0; y < 9; y++ {
 		for x := 0; x < 9; x++ {
 			fmt.Printf("%c", board[y][x]+'0')
@@ -14,7 +15,8 @@ func DisplayBoard(board [9][9]int) {
 	}
 }
 
-func DisplayBoardHighlight(board [9][9]int, row int, col int) {
+// Display a board with the cell, located at row and col, with an highlight red color.
+func DisplayHighlight(board Board, row int, col int) {
 	for y := 0; y < 9; y++ {
 		for x := 0; x < 9; x++ {
 			if y == row && x == col {
