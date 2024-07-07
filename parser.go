@@ -8,7 +8,7 @@ func ParseBoard9x9(args []string) ([9][9]int, error) {
 
 	var out [9][9]int
 
-	if len(args) != 9 || len(args) == 0 {
+	if len(args) != 9 {
 		return out, errors.New("ParseBoard: too much or not enough arguments to create the board")
 	}
 

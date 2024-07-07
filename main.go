@@ -32,7 +32,6 @@ func IsNumberPlaceable(puzzle [9][9]int, row int, col int, num int) bool {
 		}
 
 		// Calculate the position of the next neighbour cell in the block
-		// PS -- don't know how to explain
 		cx := bx + i/3
 		cy := by + i%3
 
@@ -47,8 +46,7 @@ func IsNumberPlaceable(puzzle [9][9]int, row int, col int, num int) bool {
 }
 
 func GetPossibilities(puzzle [9][9]int, row int, col int) []int {
-
-	// Get a list of all the numbers possible on this `row` and `column`
+	// Get a list of all the numbers possible
 
 	var out []int
 
@@ -62,6 +60,8 @@ func GetPossibilities(puzzle [9][9]int, row int, col int) []int {
 }
 
 func FindNextZero(puzzle [9][9]int) (int, int) {
+	// Find the next empty on the board
+
 	for ri := 0; ri < 9; ri++ {
 		for ci := 0; ci < 9; ci++ {
 			if puzzle[ri][ci] == 0 {
@@ -69,6 +69,8 @@ func FindNextZero(puzzle [9][9]int) (int, int) {
 			}
 		}
 	}
+
+	// The board has no more empties
 	return -1, -1
 }
 
@@ -83,7 +85,7 @@ func SolveSudoku(puzzle *[9][9]int) bool {
 	for _, possibility := range possibilities {
 		puzzle[row][col] = possibility
 
-		// For debugging
+		// -- config -- Visualize the backtracking step-by-step
 		if BacktrackingVisualize {
 			DisplayBoardHighlight(*puzzle, row, col)
 			time.Sleep(BacktrackingStepTime)
@@ -103,6 +105,7 @@ func SolveSudoku(puzzle *[9][9]int) bool {
 
 func main() {
 
+	// Parse the command line arguments into a 2D array of integers
 	args := os.Args[1:]
 	puzzle, err := ParseBoard9x9(args)
 
@@ -111,11 +114,20 @@ func main() {
 		return
 	}
 
-	start := time.Now()
-	if SolveSudoku(&puzzle) {
-		duration := time.Since(start)
+	// -- config -- Show sudoku solving execution time
+	var start time.Time
+	if ShowSolveTime {
+		start = time.Now()
+	}
 
-		fmt.Printf("This sudoku has been solved in %v\n", duration)
+	if SolveSudoku(&puzzle) {
+
+		// -- config -- Show sudoku solving execution time
+		if ShowSolveTime {
+			duration := time.Since(start)
+			fmt.Printf("This sudoku has been solved in %v.\n", duration)
+		}
+
 		DisplayBoard(puzzle)
 	} else {
 		//fmt.Printf("This sudoku has no solutions\n")
