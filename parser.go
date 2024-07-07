@@ -5,6 +5,12 @@ import (
 )
 
 func ParseBoard9x9(args []string) ([9][9]int, error) {
+	// ParseBoard9x9 converts a list of string in a table of 9x9 integers.
+	// In case of an error, the function returns an error of type `error`.
+
+	// The function iterate over each arguments, then in them, iterate of each
+	// characters before placing them in the 9x9 table-removing the ascii value of the numbers.
+	//  =>   ('6' - '0') = (54 - 49) = 6
 
 	var out [9][9]int
 
